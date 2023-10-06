@@ -1,22 +1,45 @@
 #pytorch2 require cuda toolkit 12.1 .. and cuda toolkit is not compatiable with default driver 535 but with 525 on specific gpu and default cudatoolkit installation get cuda 11.5 that does not run pytroch 2 .. mess around compatability and you will likely need a fresh distro
 
-sudo apt update && sudo apt upgrade
-sudo apt autoremove nvidia* --purge
-ubuntu-drivers devices
-sudo ubuntu-drivers autoinstall
-sudo apt install nvidia-driver-525
-
-wget https://developer.download.nvidia.com/compute/cuda/12.1.0/local_installers/cuda_12.1.0_530.30.02_linux.runsudo sh cuda_12.1.0_530.30.02_linux.run
-
+#Change from additional driver to nvidia-525 o:
+#sudo apt update && sudo apt upgrade
+#sudo apt autoremove nvidia* --purge
+#ubuntu-drivers devices
+#sudo ubuntu-drivers autoinstall
+#sudo apt install nvidia-driver-525
 
 
+
+wget https://developer.download.nvidia.com/compute/cuda/12.1.0/local_installers/cuda_12.1.0_530.30.02_linux.run
+sudo sh cuda_12.1.0_530.30.02_linux.run
+            
 export PATH=/usr/local/cuda-12.1/bin${PATH:+:${PATH}}
 export LD_LIBRARY_PATH=/usr/local/cuda-12.1/lib64{LD_LIBRARY_PATH:+:${LD_LIBRARY_PATH}}
 
 
-download cudnn 
+
+gedit ~/.bashrc
+
+#add lines 
+
+
+gedit ~/.bashrc
+
+
+
+#download cudnn 
 https://developer.nvidia.com/downloads/compute/cudnn/secure/8.9.5/local_installers/12.x/cudnn-local-repo-ubuntu2204-8.9.5.29_1.0-1_amd64.deb/
-install it 
+#install it 
+sudo cp /var/cudnn-local-repo-ubuntu2204-8.9.5.29.gpg /usr/share/keyrings/
+
+sudo cp /var/cudnn-local-repo-ubuntu2204-8.9.5.29/cudnn-local-275FA572-keyring.gpg  /usr/share/keyrings/
+sudo apt install libcudnn8
+sudo apt install libcudnn8-dev
+sudo apt install libcudnn8-samples
+
+conda install -c conda-forge mamba 
+mabma  install pytorch torchvision torchaudio pytorch-cuda=12.1 -c pytorch -c nvidia
+
+ 
 
 conda install -c conda-forge mamba
 mamba install pytorch torchvision torchaudio pytorch-cuda=12.1 -c pytorch -c nvidia
